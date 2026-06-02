@@ -1,0 +1,375 @@
+/* ===================================================================
+   アプリ全体の見た目をまとめたファイルです。
+   スマホ優先（モバイルファースト）で作り、画面が広いときだけ
+   レイアウトを広げます。
+   =================================================================== */
+
+:root {
+  /* 色の設定。ここを変えると全体の色が変わります */
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #1a2330;
+  --text-sub: #64748b;
+  --primary: #0f766e; /* 深い緑（メインの色） */
+  --primary-dark: #0b5b54;
+  --land: #15803d; /* 土地の色（緑） */
+  --income: #1d4ed8; /* 収益物件の色（青） */
+  --danger: #dc2626; /* 削除など危険操作の色 */
+  --calc-bg: #f0fdfa; /* 自動計算欄の背景 */
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* --- ヘッダー --- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--primary);
+  color: #fff;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.header a {
+  color: #fff;
+  text-decoration: none;
+}
+.header h1 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* --- ページ全体の余白 --- */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* --- ボタン --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s, background 0.15s;
+  font-family: inherit;
+}
+.btn:active {
+  opacity: 0.8;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-light {
+  background: #fff;
+  color: var(--primary);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.btn-outline {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-danger {
+  background: var(--surface);
+  color: var(--danger);
+  border-color: #fecaca;
+}
+.btn-block {
+  width: 100%;
+}
+
+/* --- タブ（すべて / 土地 / 収益物件） --- */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-sub);
+  cursor: pointer;
+}
+.tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* --- 検索ボックス --- */
+.search {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px; /* 16px以上にするとスマホで自動ズームしない */
+  margin-bottom: 14px;
+  background: var(--surface);
+  font-family: inherit;
+}
+.search:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+}
+
+/* --- 物件カード --- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #fff;
+}
+.badge-land {
+  background: var(--land);
+}
+.badge-income {
+  background: var(--income);
+}
+.badge-soft {
+  background: #f1f5f9;
+  color: var(--text-sub);
+  font-weight: 600;
+}
+.card-address {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  margin: 12px 0;
+}
+.cell .label {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+.cell .value {
+  font-size: 15px;
+  font-weight: 600;
+}
+.cell .value .unit {
+  font-size: 11px;
+  color: var(--text-sub);
+  font-weight: 400;
+  margin-left: 2px;
+}
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.card-actions .btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* --- 空っぽのときの表示 --- */
+.empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--text-sub);
+}
+
+/* --- フォーム --- */
+.form-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.form-section h2 {
+  font-size: 15px;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+  color: var(--primary);
+}
+.field {
+  margin-bottom: 14px;
+}
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text);
+}
+.field .hint {
+  font-size: 11px;
+  color: var(--text-sub);
+  font-weight: 400;
+  margin-left: 4px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 16px; /* スマホで自動ズームさせない */
+  background: #fff;
+  font-family: inherit;
+  color: var(--text);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+}
+.field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 2列に並べるための行 */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 自動計算の表示欄 */
+.calc-box {
+  background: var(--calc-bg);
+  border: 1px dashed var(--primary);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.calc-box h2 {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: var(--primary-dark);
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.calc-item .label {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+.calc-item .value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.calc-item .value .unit {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-sub);
+  margin-left: 3px;
+}
+
+/* フォーム下部の操作ボタン */
+.form-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.form-footer .btn {
+  flex: 1;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 0 16px;
+}
+.back-link {
+  display: inline-block;
+  color: var(--text-sub);
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* --- 画面が広いとき（タブレット・PC）だけ調整 --- */
+@media (min-width: 640px) {
+  .header h1 {
+    font-size: 20px;
+  }
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .calc-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .form-footer {
+    justify-content: flex-end;
+  }
+  .form-footer .btn {
+    flex: none;
+    min-width: 140px;
+  }
+}
